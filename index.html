@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modul Edukasi: Biomekanika & Manufaktur AFO</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Menggunakan Font Inter untuk kesan modern dan bersih -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            medical: {
+              50: '#f0f9ff', // sky-50
+              100: '#e0f2fe', // sky-100
+              200: '#bae6fd', // sky-200
+              500: '#0ea5e9', // sky-500
+              600: '#0284c7', // sky-600
+              700: '#0369a1', // sky-700
+              900: '#0c4a6e', // sky-900
+            },
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+            }
+          },
+          boxShadow: {
+            'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
+            'card': '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+          },
+          backgroundImage: {
+            'gradient-soft': 'linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Pola latar belakang medis yang halus */
+    .bg-grid-medical {
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    
+    /* Agar anchor link tidak tertutup header saat discroll */
+    html {
+      scroll-padding-top: 6rem;
+    }
+    
+    /* Efek halus untuk baris tabel */
+    .matrix-row:hover td {
+      background-color: #f0f9ff;
+    }
+
+    /* Custom Scrollbar Light */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8fafc; 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1; 
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8; 
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-700 antialiased font-sans selection:bg-medical-100 selection:text-medical-900">
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-slate-100 z-50 transition-all duration-300 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+      <div class="flex items-center gap-4 group cursor-pointer">
+        <!-- Logo Local -->
+        <div class="relative p-2 bg-medical-50 rounded-xl transition-all group-hover:bg-medical-100">
+           <img src="gambar/Logo (2).png" alt="AFO Logo" class="w-10 h-10 object-contain" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-slate-800 text-lg leading-tight tracking-tight group-hover:text-medical-600 transition-colors">AFO Education</span>
+          <span class="text-[11px] text-medical-500 font-bold uppercase tracking-widest">Modul Klinis</span>
+        </div>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-1 p-1.5 rounded-full bg-slate-50 border border-slate-100">
+        <a href="#intro" class="px-5 py-2 rounded-full text-sm font-medium text-slate-500 hover:text-medical-700 hover:bg-white hover:shadow-sm transition-all">Pengantar</a>
+        <a href="#mechanics" class="px-5 py-2 rounded-full text-sm font-medium text-slate-500 hover:text-medical-700 hover:bg-white hover:shadow-sm transition-all">Mekanika</a>
+        <a href="#materials" class="px-5 py-2 rounded-full text-sm font-medium text-slate-500 hover:text-medical-700 hover:bg-white hover:shadow-sm transition-all">Material</a>
+        <a href="#types" class="px-5 py-2 rounded-full text-sm font-medium text-slate-500 hover:text-medical-700 hover:bg-white hover:shadow-sm transition-all">Jenis</a>
+        <a href="#casestudy" class="px-5 py-2 rounded-full text-sm font-medium text-slate-500 hover:text-medical-700 hover:bg-white hover:shadow-sm transition-all">Studi Kasus</a>
+      </nav>
+
+      <a href="#summary" class="hidden lg:inline-flex items-center gap-2 bg-medical-600 hover:bg-medical-700 text-white text-sm font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-medical-200 transform hover:-translate-y-0.5">
+        <span>Decision Matrix</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (Calm Aesthetic) -->
+  <section id="intro" class="relative min-h-screen flex items-center pt-24 px-6 border-b border-slate-100 overflow-hidden bg-slate-50">
+    <!-- Background Image Local with Soft Gradient Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img src="gambar/BG1.png" 
+           alt="Doctor fitting AFO" 
+           class="w-full h-full object-cover object-center opacity-90" />
+      <!-- White/Medical Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/20"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto w-full relative z-10 grid md:grid-cols-2 gap-20 items-center mt-10 pb-20">
+      <div class="space-y-10">
+        <!-- Badge Top -->
+        <span class="inline-flex items-center gap-3 py-2 px-5 rounded-full bg-white border border-medical-100 text-medical-600 text-xs font-bold tracking-widest shadow-sm">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-medical-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-medical-500"></span>
+          </span>
+          STUDI KASUS BIOMEKANIKA
+        </span>
+
+        <!-- Headline -->
+        <div class="space-y-4">
+          <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
+            Analisis Teknis <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-medical-500 to-teal-500">Ankle-Foot Orthosis</span>
+          </h1>
+          <p class="text-xl text-slate-600 leading-relaxed max-w-lg font-light">
+            Pendekatan klinis berbasis bukti untuk perancangan alat bantu ortopedi modern dengan standar manufaktur presisi.
+          </p>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="flex gap-4">
+          <a href="#mechanics" class="group relative inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold overflow-hidden transition-all hover:bg-slate-800 hover:shadow-xl hover:-translate-y-1">
+            <span>Mulai Belajar</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 transition-transform group-hover:translate-x-1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <a href="#casestudy" class="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-600 border border-slate-200 rounded-2xl font-bold overflow-hidden transition-all hover:bg-slate-50 hover:text-slate-900 hover:border-slate-300">
+            <span>Lihat Kasus</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Calm Card -->
+      <div class="hidden md:block relative">
+        <div class="relative bg-white/60 backdrop-blur-xl border border-white p-8 rounded-[2.5rem] shadow-soft">
+          <div class="flex justify-between items-start mb-8">
+            <div>
+              <h3 class="text-slate-800 font-bold text-2xl tracking-tight">Parameter Kunci</h3>
+              <p class="text-slate-500 text-sm mt-1">Faktor keberhasilan desain AFO</p>
+            </div>
+            <div class="p-3 bg-white rounded-2xl border border-slate-100 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-medical-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <!-- Item 1 -->
+            <div class="bg-white p-5 rounded-2xl flex items-center justify-between border border-slate-100 shadow-sm hover:border-rose-100 transition-colors">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center text-rose-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+                </div>
+                <span class="text-slate-700 font-medium">Kenyamanan Pasien</span>
+              </div>
+              <span class="bg-rose-50 text-rose-600 border border-rose-100 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                Kritis
+              </span>
+            </div>
+            <!-- Item 2 -->
+            <div class="bg-white p-5 rounded-2xl flex items-center justify-between border border-slate-100 shadow-sm hover:border-teal-100 transition-colors">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" /></svg>
+                </div>
+                <span class="text-slate-700 font-medium">Distribusi Tekanan</span>
+              </div>
+              <span class="bg-teal-50 text-teal-600 border border-teal-100 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                Optimal
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MECHANICS SECTION -->
+  <section id="mechanics" class="py-32 bg-white relative">
+    <!-- Grid Pattern -->
+    <div class="absolute inset-0 bg-grid-medical opacity-[0.03] pointer-events-none"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      
+      <div class="mb-24 max-w-3xl">
+        <span class="text-medical-600 font-bold tracking-widest text-xs uppercase mb-3 block">Core Engineering</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Prinsip Mekanika Dasar</h2>
+        <p class="text-slate-500 text-xl leading-relaxed font-light">
+          AFO bekerja dengan memanipulasi vektor gaya eksternal untuk melawan momen internal yang patologis, menciptakan keseimbangan dinamis saat berjalan.
+        </p>
+      </div>
+
+      <!-- 3 Point Pressure Concept -->
+      <div class="bg-medical-50/50 border border-medical-100 rounded-[2.5rem] p-10 md:p-16 mb-16 shadow-sm relative overflow-hidden group">
+        <div class="grid md:grid-cols-2 gap-20 items-center relative z-10">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-white text-slate-800 border border-slate-200 shadow-sm text-xs font-bold px-4 py-2 rounded-lg mb-8 uppercase tracking-wide">
+              <span class="w-2 h-2 bg-medical-500 rounded-full animate-pulse"></span>
+              Fundamental
+            </div>
+            <h3 class="text-3xl font-bold text-slate-900 mb-6">Sistem Tiga Titik Tekan</h3>
+            <p class="text-slate-600 mb-10 leading-relaxed text-lg">
+              Prinsip ekuilibrium statis di mana satu gaya korektif utama (F1) dilawan oleh dua gaya penstabil (F2 & F3) untuk mengunci posisi sendi.
+            </p>
+
+            <ul class="space-y-6">
+              <li class="flex items-start gap-6 group/item">
+                <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-medical-500 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-medical-500/20 group-hover/item:scale-110 transition-transform">F1</span>
+                <div>
+                  <strong class="text-slate-900 block text-lg mb-1">Fulcrum (Strap/Tali)</strong>
+                  <span class="text-slate-500 leading-relaxed">Gaya korektif di punggung kaki (Instep) menahan kaki agar tidak jatuh.</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-6 group/item">
+                <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-white text-slate-500 border border-slate-200 flex items-center justify-center font-bold text-lg group-hover/item:border-medical-200 group-hover/item:text-medical-500 transition-colors">F2</span>
+                <div>
+                  <strong class="text-slate-900 block text-lg mb-1">Stabilizer Proksimal (Shell)</strong>
+                  <span class="text-slate-500 leading-relaxed">Bagian belakang betis menahan dorongan ke depan.</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-6 group/item">
+                <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-white text-slate-500 border border-slate-200 flex items-center justify-center font-bold text-lg group-hover/item:border-medical-200 group-hover/item:text-medical-500 transition-colors">F3</span>
+                <div>
+                  <strong class="text-slate-900 block text-lg mb-1">Stabilizer Distal (Shell)</strong>
+                  <span class="text-slate-500 leading-relaxed">Bagian bawah telapak kaki menahan dorongan ke atas.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Ilustrasi SVG 3 Titik -->
+          <div class="relative bg-white rounded-[2.5rem] p-10 border border-slate-100 flex items-center justify-center h-[500px] shadow-xl shadow-slate-200/50">
+            <svg viewBox="0 0 300 400" class="w-full h-full max-w-[350px] drop-shadow-lg" fill="none" stroke="currentColor" stroke-width="2">
+              <!-- Kaki (Betis & Tapak) - Outline Abu -->
+              <path d="M100,50 L100,250 Q100,300 150,300 L220,300" class="text-slate-100 stroke-[24] fill-none stroke-linecap-round"/>
+              
+              <!-- AFO Shell (Belakang Betis & Bawah Kaki) - Garis Biru -->
+              <path d="M85,50 L85,260 Q85,315 140,315 L225,315" class="text-slate-800 stroke-[8] fill-none stroke-linecap-round"/>
+              
+              <!-- F1 (Instep Strap) - Mendorong ke Belakang -->
+              <path d="M130,240 L90,260" class="text-medical-500 stroke-[5]" marker-end="url(#arrowhead-medical)"/>
+              <circle cx="135" cy="240" r="8" class="fill-medical-500 border-none"/>
+              <text x="155" y="245" class="fill-medical-600 font-bold text-lg border-none">F1</text>
+
+              <!-- F2 (Calf Shell) - Mendorong ke Depan -->
+              <path d="M60,100 L90,100" class="text-slate-400 stroke-[5]" marker-end="url(#arrowhead-indigo)"/>
+              <text x="20" y="105" class="fill-slate-400 font-bold text-lg border-none">F2</text>
+              
+              <!-- F3 (Toe Shell) - Mendorong ke Atas -->
+              <path d="M200,340 L200,310" class="text-slate-400 stroke-[5]" marker-end="url(#arrowhead-indigo)"/>
+              <text x="190" y="365" class="fill-slate-400 font-bold text-lg border-none">F3</text>
+              
+              <defs>
+                <marker id="arrowhead-medical" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto"><polygon points="0 0, 6 2, 0 4" class="fill-medical-500" /></marker>
+                <marker id="arrowhead-indigo" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto"><polygon points="0 0, 6 2, 0 4" class="fill-slate-400" /></marker>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS TABLE SECTION -->
+  <section id="materials" class="py-32 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <h2 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Komparasi Material Sains</h2>
+          <p class="text-slate-500 text-lg max-w-xl font-light">Pemilihan bahan berdasarkan modulus elastisitas dan kekuatan luluh (<em>yield strength</em>).</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs font-mono text-medical-600 bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm">Updated: 2025 Standard</span>
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-slate-200 shadow-soft bg-white overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-bold border-b border-slate-100">
+                <th class="py-6 px-8">Material</th>
+                <th class="py-6 px-8">Karakteristik Mekanis</th>
+                <th class="py-6 px-8">Indikasi Klinis</th>
+                <th class="py-6 px-8 text-rose-500">Limitasi</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm divide-y divide-slate-100">
+              <!-- PP -->
+              <tr class="hover:bg-medical-50/50 transition-colors group">
+                <td class="py-6 px-8 align-top">
+                  <span class="font-bold text-slate-900 text-lg block group-hover:text-medical-600 transition-colors">Polypropylene (PP)</span>
+                  <span class="text-xs font-mono text-slate-400 mt-1 block">Homopolymer</span>
+                </td>
+                <td class="py-6 px-8 text-slate-600 align-top leading-relaxed">Rigiditas Tinggi, Thermoplastic, Tahan Fatik</td>
+                <td class="py-6 px-8 text-slate-600 align-top leading-relaxed">AFO Standar, Spastisitas, Cerebral Palsy</td>
+                <td class="py-6 px-8 text-slate-500 align-top leading-relaxed">Memutih jika ditekuk ekstrem (<em>Stress Whitening</em>).</td>
+              </tr>
+              <!-- Copolymer -->
+              <tr class="hover:bg-medical-50/50 transition-colors group">
+                <td class="py-6 px-8 align-top">
+                  <span class="font-bold text-slate-900 text-lg block group-hover:text-medical-600 transition-colors">Copolymer</span>
+                  <span class="text-xs font-mono text-slate-400 mt-1 block">PP + PE Mix</span>
+                </td>
+                <td class="py-6 px-8 text-slate-600 align-top leading-relaxed">Lebih fleksibel dari PP, tidak mudah retak, tahan benturan dingin.</td>
+                <td class="py-6 px-8 text-slate-600 align-top leading-relaxed">Posterior Leaf Spring (PLS), AFO Dinamis yang butuh gerak.</td>
+                <td class="py-6 px-8 text-slate-500 align-top leading-relaxed">Kurang kaku untuk pasien berat badan berlebih.</td>
+              </tr>
+              <!-- Carbon -->
+              <tr class="hover:bg-medical-50/50 transition-colors group">
+                <td class="py-6 px-8 align-top">
+                  <span class="font-bold text-slate-900 text-lg block group-hover:text-purple-600 transition-colors">Carbon Fiber</span>
+                  <span class="text-xs font-mono text-slate-400 mt-1 block">Thermoset Composite</span>
+                </td>
+                <td class="py-6 px-8 text-slate-600 align-top leading-relaxed">Ultra Ringan, Energy Return, Kaku Ekstrem</td>
+                <td class="py-6 px-8 text-slate-600 align-top leading-relaxed">Atlet, Pasien Aktif, Post-Polio, Foot Drop murni.</td>
+                <td class="py-6 px-8 text-slate-500 align-top leading-relaxed">Sangat mahal, tidak bisa diubah bentuk (<em>reshaped</em>).</td>
+              </tr>
+              <!-- Metal -->
+              <tr class="hover:bg-medical-50/50 transition-colors group">
+                <td class="py-6 px-8 align-top">
+                  <span class="font-bold text-slate-900 text-lg block group-hover:text-orange-600 transition-colors">Konvensional</span>
+                  <span class="text-xs font-mono text-slate-400 mt-1 block">Logam & Kulit</span>
+                </td>
+                <td class="py-6 px-8 text-slate-600 align-top leading-relaxed">Volume bisa diatur (adjustable), berat, sangat kuat.</td>
+                <td class="py-6 px-8 text-slate-600 align-top leading-relaxed">Edema fluktuatif, Diabetes parah, kulit sensitif panas.</td>
+                <td class="py-6 px-8 text-slate-500 align-top leading-relaxed">Estetika kurang baik, perawatan kulit perlu pelumasan.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES OF AFO SECTION -->
+  <section id="types" class="py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-20">
+        <span class="text-medical-600 font-bold tracking-widest text-xs uppercase mb-2 block">Katalog Desain</span>
+        <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Klasifikasi & Jenis AFO</h2>
+        <p class="text-slate-500 max-w-2xl mx-auto text-lg">Pemilihan desain AFO ditentukan oleh kekuatan otot dan Range of Motion (ROM) pasien.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-soft hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+            <div class="w-16 h-16 bg-blue-50 rounded-3xl flex items-center justify-center text-3xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">🛑</div>
+            <h3 class="font-bold text-xl text-slate-900 mb-3">Solid Ankle</h3>
+            <p class="text-sm text-slate-500 mb-6 leading-relaxed">Desain kaku yang memblokir semua gerakan pergelangan kaki.</p>
+            <div class="border-t border-slate-50 pt-5 space-y-2">
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span> Spastisitas Berat
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span> Instabilitas M-L
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-soft hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+            <div class="w-16 h-16 bg-emerald-50 rounded-3xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">🍃</div>
+            <h3 class="font-bold text-xl text-slate-900 mb-3">Leaf Spring (PLS)</h3>
+            <p class="text-sm text-slate-500 mb-6 leading-relaxed">Trimline dipotong jauh ke belakang untuk fleksibilitas saat <em>Toe-off</em>.</p>
+            <div class="border-t border-slate-50 pt-5 space-y-2">
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Drop Foot Murni
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Otot Betis Normal
+                </div>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-soft hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+            <div class="w-16 h-16 bg-purple-50 rounded-3xl flex items-center justify-center text-3xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors shadow-sm">⚙️</div>
+            <h3 class="font-bold text-xl text-slate-900 mb-3">Articulated</h3>
+            <p class="text-sm text-slate-500 mb-6 leading-relaxed">Memiliki engsel mekanis. Mengizinkan dorsifleksi tapi memblokir plantar.</p>
+            <div class="border-t border-slate-50 pt-5 space-y-2">
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> ROM Pasif Bagus
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> Butuh Squatting
+                </div>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-soft hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+            <div class="w-16 h-16 bg-orange-50 rounded-3xl flex items-center justify-center text-3xl mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors shadow-sm">📐</div>
+            <h3 class="font-bold text-xl text-slate-900 mb-3">Floor Reaction</h3>
+            <p class="text-sm text-slate-500 mb-6 leading-relaxed">Plat depan (anterior shell) mendorong lutut ke belakang saat berdiri.</p>
+            <div class="border-t border-slate-50 pt-5 space-y-2">
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-orange-500"></span> Crouch Gait
+                </div>
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <span class="w-2 h-2 rounded-full bg-orange-500"></span> Lemah Quadriceps
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCOMFORT ANALYSIS SECTION -->
+  <section id="discomfort" class="py-32 bg-gradient-soft border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      
+      <div class="mb-20 max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-slate-700 text-xs font-bold uppercase tracking-wider mb-6 border border-slate-200 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+            Analisis Klinis
+        </div>
+        <h2 class="text-4xl font-extrabold text-slate-900 mb-6">Mengapa AFO Sering Tidak Nyaman?</h2>
+        <p class="text-slate-500 text-xl leading-relaxed font-light">
+            Identifikasi faktor kegagalan <em>compliance</em> pasien. Berikut adalah 4 faktor utama penyebab ketidaknyamanan.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Factor 1: Thermodynamics -->
+        <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-soft hover:shadow-lg transition-all group relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-rose-500"></div>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center text-2xl shadow-sm">🔥</div>
+                <h3 class="text-xl font-bold text-slate-900">Retensi Panas</h3>
+            </div>
+            <p class="text-slate-600 text-base mb-8 leading-relaxed">
+                Polypropylene adalah isolator panas. Kulit di dalam AFO tidak bisa "bernapas", menyebabkan iritasi.
+            </p>
+            <div class="bg-slate-50 p-4 rounded-xl text-sm text-slate-700 font-medium border border-slate-100 flex gap-3 items-start">
+                <span class="text-medical-600 font-bold">Solusi:</span> Gunakan cotton stockinette & lubang ventilasi.
+            </div>
+        </div>
+
+        <!-- Factor 2: Shear Force (Pistoning) -->
+        <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-soft hover:shadow-lg transition-all group relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-orange-500"></div>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center text-2xl shadow-sm">↕️</div>
+                <h3 class="text-xl font-bold text-slate-900">Pistoning</h3>
+            </div>
+            <p class="text-slate-600 text-base mb-8 leading-relaxed">
+                Sumbu engsel AFO yang tidak sejajar dengan sumbu pergelangan kaki (Anatomical Axis) menyebabkan gesekan.
+            </p>
+            <div class="bg-slate-50 p-4 rounded-xl text-sm text-slate-700 font-medium border border-slate-100 flex gap-3 items-start">
+                <span class="text-medical-600 font-bold">Solusi:</span> Alignment joint harus sejajar dengan distal tip malleolus.
+            </div>
+        </div>
+
+        <!-- Factor 3: Shoe Accommodation -->
+        <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-soft hover:shadow-lg transition-all group relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-blue-500"></div>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center text-2xl shadow-sm">👟</div>
+                <h3 class="text-xl font-bold text-slate-900">Konflik Sepatu</h3>
+            </div>
+            <p class="text-slate-600 text-base mb-8 leading-relaxed">
+                AFO menambah volume kaki. Menggunakan sepatu lama menyebabkan tekanan ekstrem pada punggung kaki.
+            </p>
+            <div class="bg-slate-50 p-4 rounded-xl text-sm text-slate-700 font-medium border border-slate-100 flex gap-3 items-start">
+                <span class="text-medical-600 font-bold">Solusi:</span> Gunakan sepatu 1 ukuran lebih besar atau tipe "Extra Depth".
+            </div>
+        </div>
+
+        <!-- Factor 4: Pressure Points -->
+        <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-soft hover:shadow-lg transition-all group relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-purple-500"></div>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 bg-purple-50 text-purple-500 rounded-2xl flex items-center justify-center text-2xl shadow-sm">🦴</div>
+                <h3 class="text-xl font-bold text-slate-900">Titik Tekan</h3>
+            </div>
+            <p class="text-slate-600 text-base mb-8 leading-relaxed">
+                Area tulang menonjol (Malleolus, Navicular) tanpa ruang cukup akan menyebabkan luka tekan.
+            </p>
+            <div class="bg-slate-50 p-4 rounded-xl text-sm text-slate-700 font-medium border border-slate-100 flex gap-3 items-start">
+                <span class="text-medical-600 font-bold">Solusi:</span> Lakukan "Build-up" gips yang cukup saat rektifikasi.
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANUFACTURING PROCESS SECTION -->
+  <section id="manufacturing" class="py-32 bg-white relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-24">
+        <span class="text-medical-600 font-bold tracking-widest text-xs uppercase mb-3 block">SOP Produksi</span>
+        <h2 class="text-4xl font-extrabold text-slate-900 mt-2 mb-4">Proses Fabrikasi Teknis</h2>
+        <p class="text-slate-500 max-w-2xl mx-auto text-lg">Alur kerja pembuatan <em>Custom Molded AFO</em> menggunakan teknik <em>Vacuum Thermoforming</em>.</p>
+      </div>
+
+      <div class="relative pl-8 md:pl-0">
+        <!-- Center Line for Desktop -->
+        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 transform -translate-x-1/2"></div>
+        <!-- Vertical Line for Mobile -->
+        <div class="md:hidden absolute left-0 top-0 bottom-0 w-0.5 bg-slate-200"></div>
+
+        <!-- Step 1 -->
+        <div class="group relative flex flex-col md:flex-row items-center justify-between mb-24">
+          <div class="md:w-1/2 mb-4 md:mb-0 md:text-right pr-0 md:pr-16 pl-8 md:pl-0">
+            <h4 class="text-2xl font-bold text-slate-900 group-hover:text-medical-600 transition-colors">1. Casting & Scanning</h4>
+            <p class="text-slate-500 mt-3 text-base leading-relaxed">
+              Pengambilan geometri kaki pasien. <br>
+              <span class="text-rose-500 font-semibold text-sm">⚠ Kritis:</span> Kaki harus diposisikan dalam keadaan <em>Subtalar Neutral</em>.
+            </p>
+          </div>
+          <div class="absolute left-[-10px] md:left-1/2 w-6 h-6 rounded-full bg-white border-[5px] border-medical-500 z-10 transform md:-translate-x-1/2 shadow-md group-hover:scale-125 transition-transform duration-300"></div>
+          <div class="md:w-1/2 pl-8 md:pl-16">
+            <span class="inline-block px-5 py-2 bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold rounded-full uppercase tracking-wide">Fase Klinis</span>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="group relative flex flex-col md:flex-row items-center justify-between mb-24">
+          <div class="md:w-1/2 order-2 md:order-1 pl-8 md:pl-0 md:pr-16 md:text-right">
+             <span class="inline-block px-5 py-2 bg-amber-50 text-amber-600 border border-amber-100 text-xs font-bold rounded-full uppercase tracking-wide">Modifikasi</span>
+          </div>
+          <div class="absolute left-[-10px] md:left-1/2 w-6 h-6 rounded-full bg-white border-[5px] border-slate-300 group-hover:border-medical-500 z-10 transform md:-translate-x-1/2 transition-colors shadow-md group-hover:scale-125 duration-300"></div>
+          <div class="md:w-1/2 order-1 md:order-2 mb-4 md:mb-0 pl-8 md:pl-16">
+            <h4 class="text-2xl font-bold text-slate-900 group-hover:text-medical-600 transition-colors">2. Rectification</h4>
+            <p class="text-slate-500 mt-3 text-base leading-relaxed">
+              Teknik menambah gips (<em>relief</em>) pada tonjolan tulang dan mengurangi gips (<em>compression</em>) pada area lunak.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="group relative flex flex-col md:flex-row items-center justify-between mb-24">
+          <div class="md:w-1/2 mb-4 md:mb-0 md:text-right pr-0 md:pr-16 pl-8 md:pl-0">
+            <h4 class="text-2xl font-bold text-slate-900 group-hover:text-medical-600 transition-colors">3. Thermoforming</h4>
+            <p class="text-slate-500 mt-3 text-base leading-relaxed">
+              Lembaran plastik dipanaskan (180°C) dan ditarik di atas positif gips dengan tekanan vakum tinggi.
+            </p>
+          </div>
+          <div class="absolute left-[-10px] md:left-1/2 w-6 h-6 rounded-full bg-white border-[5px] border-slate-300 group-hover:border-medical-500 z-10 transform md:-translate-x-1/2 transition-colors shadow-md group-hover:scale-125 duration-300"></div>
+          <div class="md:w-1/2 pl-8 md:pl-16">
+             <span class="inline-block px-5 py-2 bg-rose-50 text-rose-600 border border-rose-100 text-xs font-bold rounded-full uppercase tracking-wide">Produksi</span>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="group relative flex flex-col md:flex-row items-center justify-between">
+          <div class="md:w-1/2 order-2 md:order-1 pl-8 md:pl-0 md:pr-16 md:text-right">
+             <span class="inline-block px-5 py-2 bg-emerald-50 text-emerald-600 border border-emerald-100 text-xs font-bold rounded-full uppercase tracking-wide">Finishing</span>
+          </div>
+          <div class="absolute left-[-10px] md:left-1/2 w-6 h-6 rounded-full bg-white border-[5px] border-slate-300 group-hover:border-medical-500 z-10 transform md:-translate-x-1/2 transition-colors shadow-md group-hover:scale-125 duration-300"></div>
+          <div class="md:w-1/2 order-1 md:order-2 mb-4 md:mb-0 pl-8 md:pl-16">
+            <h4 class="text-2xl font-bold text-slate-900 group-hover:text-medical-600 transition-colors">4. Trimming & Assembly</h4>
+            <p class="text-slate-500 mt-3 text-base leading-relaxed">
+              Pemotongan sesuai Trimline, penghalusan tepi (buffing), dan pemasangan strap velcro.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY SECTION -->
+  <section id="casestudy" class="py-32 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-extrabold text-slate-900 text-center mb-16">Studi Kasus Klinis</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Case 1 -->
+            <div class="bg-white border border-slate-100 p-10 rounded-[2.5rem] shadow-soft hover:shadow-xl transition-all hover:-translate-y-1">
+                <div class="flex justify-between items-start mb-8">
+                    <h3 class="text-2xl font-bold text-slate-900">Pasien Stroke (CVA)</h3>
+                    <span class="bg-slate-100 text-slate-600 text-xs font-bold px-4 py-2 rounded-lg uppercase tracking-wider">Kasus A</span>
+                </div>
+                <ul class="space-y-4 text-slate-600 text-sm mb-10 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-medical-400"></span> Usia: 55 Tahun</li>
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-medical-400"></span> Kondisi: Spastisitas berat</li>
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-medical-400"></span> Gait: Menyeret kaki (Dragging)</li>
+                </ul>
+                <div class="pt-8 border-t border-slate-100">
+                    <p class="text-xs font-bold text-medical-600 uppercase mb-2 tracking-wide">Rekomendasi</p>
+                    <p class="font-bold text-slate-900 text-xl mb-2">Solid Ankle AFO</p>
+                    <p class="text-sm text-slate-500 leading-relaxed">Kontrol maksimal untuk melawan spastisitas dan mencegah deformitas lebih lanjut.</p>
+                </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="bg-white border border-slate-100 p-10 rounded-[2.5rem] shadow-soft hover:shadow-xl transition-all hover:-translate-y-1">
+                <div class="flex justify-between items-start mb-8">
+                    <h3 class="text-2xl font-bold text-slate-900">Cedera Peroneal</h3>
+                    <span class="bg-slate-100 text-slate-600 text-xs font-bold px-4 py-2 rounded-lg uppercase tracking-wider">Kasus B</span>
+                </div>
+                <ul class="space-y-4 text-slate-600 text-sm mb-10 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-medical-400"></span> Usia: 28 Tahun (Atlet)</li>
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-medical-400"></span> Kondisi: <em>Foot Drop</em> murni</li>
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-medical-400"></span> Gait: <em>Steppage Gait</em></li>
+                </ul>
+                <div class="pt-8 border-t border-slate-100">
+                    <p class="text-xs font-bold text-medical-600 uppercase mb-2 tracking-wide">Rekomendasi</p>
+                    <p class="font-bold text-slate-900 text-xl mb-2">Carbon Fiber Floor Reaction</p>
+                    <p class="text-sm text-slate-500 leading-relaxed"><em>Energy return</em> tinggi untuk mendukung aktivitas lari dan mobilitas tinggi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- DECISION MATRIX -->
+  <section id="summary" class="py-32 bg-gradient-soft border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex justify-between items-end mb-16">
+            <div>
+                <h2 class="text-4xl font-extrabold text-slate-900">Algoritma Pemilihan</h2>
+                <p class="text-slate-500 mt-3 text-lg">Panduan cepat pengambilan keputusan klinis.</p>
+            </div>
+            <button onclick="window.print()" class="hidden md:flex items-center gap-3 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:-translate-y-1 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                Cetak PDF
+            </button>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-slate-50 text-slate-500 text-xs uppercase font-bold tracking-wider">
+                    <tr>
+                        <th class="p-8 border-b border-slate-100">Kondisi Pasien</th>
+                        <th class="p-8 border-b border-slate-100">Tujuan Utama</th>
+                        <th class="p-8 border-b border-slate-100">Tipe AFO</th>
+                        <th class="p-8 border-b border-slate-100">Material Ideal</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm divide-y divide-slate-50">
+                    <tr class="hover:bg-medical-50/50 transition-colors">
+                        <td class="p-8 font-bold text-slate-900">Spastisitas Berat</td>
+                        <td class="p-8 text-slate-600">Blokir Gerakan & Stabilisasi</td>
+                        <td class="p-8"><span class="bg-red-50 text-red-600 px-4 py-2 rounded-full text-xs font-bold border border-red-100">SOLID ANKLE</span></td>
+                        <td class="p-8 text-slate-600 font-medium">Polypropylene</td>
+                    </tr>
+                    <tr class="hover:bg-medical-50/50 transition-colors">
+                        <td class="p-8 font-bold text-slate-900">Foot Drop (Lemas)</td>
+                        <td class="p-8 text-slate-600">Bantuan Dorsifleksi</td>
+                        <td class="p-8"><span class="bg-emerald-50 text-emerald-600 px-4 py-2 rounded-full text-xs font-bold border border-emerald-100">PLS / LEAF</span></td>
+                        <td class="p-8 text-slate-600 font-medium">Copolymer</td>
+                    </tr>
+                    <tr class="hover:bg-medical-50/50 transition-colors">
+                        <td class="p-8 font-bold text-slate-900">Lemah Quadriceps</td>
+                        <td class="p-8 text-slate-600">Cegah Lutut Tekuk (Buckling)</td>
+                        <td class="p-8"><span class="bg-orange-50 text-orange-600 px-4 py-2 rounded-full text-xs font-bold border border-orange-100">GRAFO</span></td>
+                        <td class="p-8 text-slate-600 font-medium">Carbon / Reinforced PP</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </section>
+
+  <!-- REFERENCES SECTION -->
+  <section id="references" class="py-24 bg-white border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Daftar Pustaka</h2>
+        <p class="text-slate-500">Referensi ilmiah yang digunakan dalam penyusunan modul ini.</p>
+      </div>
+      
+      <div class="bg-slate-50 rounded-3xl border border-slate-100 p-10 shadow-inner h-96 overflow-y-auto custom-scrollbar">
+        <ul class="space-y-6 text-xs text-slate-500 font-mono leading-relaxed">
+          <li class="pl-6 border-l-2 border-medical-300">
+            Daryabor, A., Arazpour, M., Aminian, G., & Ghomshe, F. T. (2018). Effect of different designs of ankle–foot orthoses on gait in patients with stroke: A systematic review. <em>Gait & Posture</em>, 62, 268–279. https://doi.org/10.1016/j.gaitpost.2018.03.031
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Daryabor, A., Arazpour, M., & Aminian, G. (2018). Effect of different designs of ankle-foot orthoses on gait in patients with stroke: A systematic review. <em>Disability and Rehabilitation: Assistive Technology</em>, 13(7), 661–671. https://doi.org/10.1080/17483107.2017.1369585
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Hsu, Y. C., Lin, Y. J., & Yang, T. S. (2022). Comfort and usability of ankle-foot orthoses in post-stroke patients: A mixed-method study. <em>Disability and Rehabilitation: Assistive Technology</em>, 17(8), 852–860. https://doi.org/10.1080/17483107.2021.1890502
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Kobayashi, T., Leung, A. K. L., & Akazawa, Y. (2016). Effect of ankle-foot orthoses on gait biomechanics after stroke: A systematic review. <em>Physiotherapy</em>, 102(2), 130–136. https://doi.org/10.1016/j.physio.2015.08.003
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Kobayashi, T., Orendurff, M. S., Hunt, G., Gao, F., LeCursi, N., Lincoln, L. S., & Foreman, K. B. (2019). The effects of alignment of an articulated ankle-foot orthosis on lower limb joint kinematics and kinetics during gait in individuals post-stroke. <em>Journal of biomechanics</em>, 83, 57–64. https://doi.org/10.1016/j.jbiomech.2018.11.019
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Kobayashi, T., Orendurff, M. S., Hunt, G., Gao, F., LeCursi, N., Lincoln, L. S., & Foreman, K. B. (2016). The effects of alignment of an articulated ankle-foot orthosis on lower limb joint kinematics and kinetics during gait in individuals post-stroke. <em>Clinical Biomechanics</em>, 37, 7–12. https://doi.org/10.1016/j.clinbiomech.2016.05.012
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Nouri, A., Wang, L., Li, Y., & Wen, C. (2020). Materials and manufacturing for ankle–foot orthoses: A review. <em>Materials & Design</em>, 193, 108773. https://doi.org/10.1016/j.matdes.2020.108773
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Qiu, J., He, L., Chen, C., & Zhang, Q. (2023). Pressure distribution and comfort evaluation in 3D-printed ankle-foot orthoses. <em>Journal of NeuroEngineering and Rehabilitation</em>, 20(1), 45. https://doi.org/10.1186/s12984-023-01122-5
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Rao, N., Khanna, M., & Taly, A. B. (2019). User satisfaction and functional outcomes of ankle-foot orthoses in stroke patients. <em>Journal of Rehabilitation Medicine</em>, 51(7), 530–536. https://doi.org/10.2340/16501977-2565
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Shuman, B. R., Hendershot, B. D., Morgenroth, D. C., & Esposito, E. R. (2022). A patient-centered ‘test-drive’ strategy for ankle-foot orthosis prescription: Protocol for a randomized participant-blinded trial. <em>PLOS ONE</em>, 17(3), e0265031. https://doi.org/10.1371/journal.pone.0265031
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Tyson, S. F., & Rogerson, L. (2016). Assistive walking devices after stroke: A systematic review. <em>Clinical Rehabilitation</em>, 30(6), 533–541. https://doi.org/10.1177/0269215515593616
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            van der Wilk, D., Dijkstra, P. U., Postema, K., & Verkerke, G. J. (2015). A user-centered evaluation of orthotic comfort: Development of a new comfort score. <em>Prosthetics and Orthotics International</em>, 39(3), 203–210. https://doi.org/10.1177/0309364613516488
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Wong, C. K., Chen, C. C., Black, C., & Smith, J. D. (2021). Ankle-foot orthosis use improves walking function and quality of life after stroke: A meta-analysis. <em>Stroke</em>, 52(3), e160–e162. https://doi.org/10.1161/STROKEAHA.120.032019
+          </li>
+          <li class="pl-6 border-l-2 border-medical-300">
+            Wu, F., Meng, Z., Yang, K., & Li, J. (2020). Effects of ankle–foot orthoses on gait parameters in post-stroke patients with different Brunnstrom stages of the lower limb: A single-center crossover trial. <em>Clinical Rehabilitation</em>, 34(9), 1189–1198. https://doi.org/10.1177/0269215520930690
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-20 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
+      <div>
+        <h4 class="text-white font-bold text-2xl mb-2 tracking-tight">Randi Achtiar Risaldi</h4>
+        <p class="font-mono text-medical-400 text-lg mb-6">5049231082</p>
+        <div class="space-y-2 text-sm text-slate-500">
+          <p class="font-medium text-slate-400">Desain Teknologi Kesehatan — Semester 5</p>
+          <p>Departemen Teknik Biomedik</p>
+          <p>Institut Teknologi Sepuluh Nopember</p>
+        </div>
+      </div>
+      <div class="text-left md:text-right pt-4 md:pt-0">
+        <p class="text-sm text-slate-600 mb-2">© 2025 Academic Project.</p>
+        <p class="text-xs text-slate-700 max-w-xs ml-auto leading-relaxed">
+            Disusun untuk memenuhi tugas mata kuliah dengan pendekatan berbasis bukti klinis dan standar manufaktur modern.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
